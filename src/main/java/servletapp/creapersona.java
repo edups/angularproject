@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Darkwardo
+ * @author Eduardo Pecino Soriano
  */
 public class creapersona extends HttpServlet {
 
