@@ -16,28 +16,31 @@
         </script> 
     </head>
     <body ng-controller="MiAplicacion01Controller">
-        <div class="row">
-            <div class="col s8">
-                <table class="striped">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Apellido1</th>
-                            <th>apellido2</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="b in bean">
-                            <td>{{b.id}}</td>
-                            <td>{{b.nombre}}</td>
-                            <td>{{b.apellido1}}</td>
-                            <td>{{b.apellido2}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <a href="index.html" class="waves-effect waves-light btn">Home</a>
+        <div class="container">
+            <div class="row">
+                <h4 class="center-align"> Listado con Angular</h4>
+                <div class="col s8 offset-s2">
+                    <table class="striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Apellido1</th>
+                                <th>Apellido2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="b in bean">
+                                <td>{{b.id}}</td>
+                                <td>{{b.nombre}}</td>
+                                <td>{{b.apellido1}}</td>
+                                <td>{{b.apellido2}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-
     </body>
 </html>

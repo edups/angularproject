@@ -17,11 +17,12 @@
     </head>
     <body ng-controller="MiAplicacion01Controller">
         <div class="row">
-            <form class="col s8">
-              
-                <fieldset class="teal lighten-5 z-depth-1">
-                    <legend>Formulario persona</legend>
-                    
+            <a href="index.html" class="waves-effect waves-light btn">Home</a>
+            <h4 class="center-align"> Formulario con Angular</h4>
+            <form class="col s6 offset-s3">
+
+                <fieldset class="teal lighten-4 z-depth-1">
+
                     <label for="id">ID:</label><input id="id" name="id" type="text" ng-model="bean.id" /><br>
                     <label for="nombre">Nombre:</label><input id="nombre" name="nombre" type="text" ng-model="bean.nombre" /><br>
                     <label for="ape1">1º Apellido:</label><input id="ape1" name="ape1" type="text" ng-model="bean.apellido1" /><br>
@@ -29,6 +30,7 @@
                 </fieldset>
             </form>
         </div>
+            
 
         <script src="js/vendor/jquery-2.1.4.js" type="text/javascript"></script>
         <script src="materialize/js/materialize.min.js" type="text/javascript"></script>

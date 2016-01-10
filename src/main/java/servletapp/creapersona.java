@@ -39,7 +39,8 @@ public class creapersona extends HttpServlet {
                 if (operation != "" && operation != null && operation.equals("form")) {
                     out.print("{\"status\":200,\"message\": {\"id\":1,\"nombre\":\"edu\",\"apellido1\":\"alumno\",\"apellido2\":\"daw\"}}");
                 } else if(operation.equals("list")){
-                    out.print("{\"status\":200,\"message\": [{\"id\":1,\"nombre\":\"edu\",\"apellido1\":\"alumno\",\"apellido2\":\"daw\"},{\"id\":2,\"nombre\":\"pepe\",\"apellido1\":\"goteras\",\"apellido2\":\"caen\"},{\"id\":3,\"nombre\":\"aitor\",\"apellido1\":\"tilla\",\"apellido2\":\"patata\"}]}");
+                    out.print("{\"status\":200,\"message\": [{\"id\":1,\"nombre\":\"edu\",\"apellido1\":\"alumno\",\"apellido2\":\"daw\"},{\"id\":2,\"nombre\":\"pepe\",\"apellido1\":\"goteras\",\"apellido2\":\"caen\"},{\"id\":3,\"nombre\":\"aitor\",\"apellido1\":\"tilla\",\"apellido2\":\"patata\"},"
+                            +"{\"id\":4,\"nombre\":\"maria\",\"apellido1\":\"delmonte\",\"apellido2\":\"acaballo\"},{\"id\":5,\"nombre\":\"juan\",\"apellido1\":\"chu\",\"apellido2\":\"tri\"},{\"id\":6,\"nombre\":\"felix\",\"apellido1\":\"gato\",\"apellido2\":\"botas\"}]}");
                 }else {
                     out.print("{\"status\":500,\"message\":\" Operación no autorizada\"}"); 
                 }
