@@ -6,18 +6,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="materialize/css/materialize.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/vendor/angular.min.js" type="text/javascript"></script>
-        <script>
-            angular.module('MiAplicacion', [])
+         <script>
+            var app = angular.module('MiAplicacion', []);
+           
+       
 //                    .controller('MiAplicacion01Controller', controladorPrincipal);
-                    .controller('MiAplicacion01Controller', ['$scope', '$http', function($scope, $http) {
+                    app.controller('MiAplicacion01Controller', ['$scope', '$http', function($scope, $http) {
 //                            var url="http://mapas.valencia.es/lanzadera/opendata/TRA_APARCALIBRES/JSON";
-                              var url="http://martos.es/images/areas/portaltransparencia/datosabiertos/asociaciones.json";
+//                              var url="http://martos.es/images/areas/portaltransparencia/datosabiertos/asociaciones.json";
+                              var url="http://apigobiernoabiertortod.valencia.es/apirtod/rest/datasets/estado_trafico.json";
 
                             $http.get(url, 'GET', '').then(function(data) {
-                                $scope.data = data;
+                                $scope.data = data.data.resources;
+                                
                             });
                         }]);
-
+           
 //            function controladorPrincipal($scope, $http) {
 ////                var url= "http://mapas.valencia.es/lanzadera/opendata/TRA_APARCALIBRES/JSON?callback=JSON_CALLBACK";
 //var url= "http://martos.es/images/areas/portaltransparencia/datosabiertos/asociaciones.json?callback=JSON_CALLBACK"
@@ -32,16 +36,40 @@
 
         </script> 
     </head>
-    <body ng-controller="MiAplicacion01Controller">
+    <body >
         <a href="index.html" class="waves-effect waves-light btn">Home</a>
         <div class="container">
-            <div class="row">
+            <div ng-controller="MiAplicacion01Controller" class="row" >
                 <h4 class="center-align"> Listado Open Data</h4>
                 <div class="col s8 offset-s2">
                     <p>Zona de prueba</p>
                     <pre ng-model="data">
                     {{data}}
                     </pre>
+                    
+                    <table class="striped">
+                        <thead>
+                            <tr>
+                                <th>Id tramo</th>
+                                <th>Longitud/ Latitud</th>
+                                <th>Denominación</th>
+                                <th>Fecha modificación</th>
+                                <th>Estado</th>
+                                <th>URI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="d in data">
+                                <td>{{d['vlc:idtramo']}}</td>
+                                <td>{{d['vlc:geojson']}}</td>
+                                <td>{{d['vlc:denominacion']}}</td>
+                                <td>{{d['dc:modified']}}</td>
+                                <td>{{d['vlc:estado']}}</td>
+                                <td>{{d.uri}}</td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
                     
                 </div>
             </div>
