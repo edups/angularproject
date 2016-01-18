@@ -119,7 +119,7 @@ app.controller('MapCtrl', ['MarkerCreatorService', '$scope', function (MarkerCre
        
 //                    .controller('MiAplicacion01Controller', controladorPrincipal);
  app2.controller('MiAplicacion01Controller', ['$scope', '$http', function($scope, $http) {
-                              var url="http://apigobiernoabiertortod.valencia.es/apirtod/rest/datasets/estado_trafico.json";
+                              var url="http://apigobiernoabiertortod.valencia.es/apirtod/rest/datasets/intensidad_trafico.json";
 
                             $http.get(url, 'GET', '').then(function(data) {
                                 $scope.data = data.data.resources;

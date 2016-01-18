@@ -63,21 +63,23 @@
                     <table class="striped">
                         <thead>
                             <tr>
-                                <th>Id tramo</th>
-                                <th>Longitud/ Latitud</th>
-                                <th>Denominación</th>
+                                <th>Sensor</th>
+                                <th>Latitud</th>
+                                <th>Longitud</th>
+                                <th>Ángulo</th>
                                 <th>Fecha modificación</th>
-                                <th>Estado</th>
+                                <th>Intensidad</th>
                                 <th>URI</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="d in data">
-                                <td>{{d['vlc:idtramo']}}</td>
-                                <td>{{d['vlc:geojson']}}</td>
-                                <td>{{d['vlc:denominacion']}}</td>
-                                <td>{{d['dc:modified']}}</td>
-                                <td>{{d['vlc:estado']}}</td>
+                                <td>{{d['vlc:sensor']}}</td>
+                                <td>{{d['geo:lat']}}</td>
+                                <td>{{d['geo:long']}}</td>
+                                <td>{{d['vlc:angulo']}}</td>
+                                <td>{{d['dc:modified'] | date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                                <td>{{d['vlc:intensidad']}}</td>
                                 <td>{{d.uri}}</td>
                                 
                             </tr>
