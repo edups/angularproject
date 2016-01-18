@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="AngularGoogleMap" >
+<html ng-app="MiAplicationconjunta" >
     <head>
         <meta charset="utf-8">
         <title>AngularJS / Google Maps </title>
@@ -24,8 +24,8 @@
         <!--<script src="js/vendor/angular-google-maps.js" type="text/javascript"></script>-->
 
         <!-- Custom angular module -->
-        <script src="js/map.js" type="text/javascript"></script>
-        <!--<script src="js/controlervarios.js" type="text/javascript"></script>-->
+        <!--<script src="js/map.js" type="text/javascript"></script>-->
+        <script src="js/controlervarios.js" type="text/javascript"></script>
 
     </head>
     <body ng-controller="MapCtrl">
@@ -50,6 +50,41 @@
                     <input type="text" placeholder="Ejemplo:Calle Bolero de Carlet nº 3,Valencia" ng-model="address" style="width: 210px"/>
                     <button ng-click="addAddress()">Buscar</button>    
                 </p>
+            </div>
+            
+                    <div ng-controller="MiAplicacion01Controller" class="row" >
+                <h4 class="center-align"> Listado Open Data</h4>
+                <div class="col s8 offset-s2">
+                    <p>Zona de prueba</p>
+                    <pre ng-model="data">
+                    {{data}}
+                    </pre>
+                    
+                    <table class="striped">
+                        <thead>
+                            <tr>
+                                <th>Id tramo</th>
+                                <th>Longitud/ Latitud</th>
+                                <th>Denominación</th>
+                                <th>Fecha modificación</th>
+                                <th>Estado</th>
+                                <th>URI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="d in data">
+                                <td>{{d['vlc:idtramo']}}</td>
+                                <td>{{d['vlc:geojson']}}</td>
+                                <td>{{d['vlc:denominacion']}}</td>
+                                <td>{{d['dc:modified']}}</td>
+                                <td>{{d['vlc:estado']}}</td>
+                                <td>{{d.uri}}</td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
             </div>
    
     </body>
