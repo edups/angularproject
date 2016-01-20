@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="MiAplicationconjunta" >
+<html ng-app="AGMap" >
     <head>
         <meta charset="utf-8">
         <title>AngularJS / Google Maps </title>
@@ -7,7 +7,7 @@
         <link href="materialize/css/materialize.min.css" rel="stylesheet" type="text/css"/>
         <link href="style.css" rel="stylesheet" type="text/css"/>
         <!--<link href="style.css" rel="stylesheet"/>-->
-
+        <script src="js/vendor/jquery-2.1.4.js" type="text/javascript"></script>
         <!-- AngularJS -->
         <script src="js/vendor/angular.min.js" type="text/javascript"></script>
         <!--<script src="js/vendor/angular-route.min.js" type="text/javascript"></script>-->
@@ -26,9 +26,11 @@
         <!-- Custom angular module -->
         <!--<script src="js/map.js" type="text/javascript"></script>-->
         <script src="js/controlervarios.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.12/proj4-src.js" type="text/javascript"></script>
+
 
     </head>
-    <body ng-controller="MapCtrl">
+    <body ng-controller="MapCtrl as mapa">
         <a href="index.html" class="waves-effect waves-light btn">Home</a>
         
             <h4 class="center-align">ANGULARJS / GOOGLE MAPS Pruebas</h4>
@@ -50,11 +52,13 @@
                     <input type="text" placeholder="Ejemplo:Calle Bolero de Carlet nº 3,Valencia" ng-model="address" style="width: 210px"/>
                     <button ng-click="addAddress()">Buscar</button>    
                 </p>
+                <p><button ng-click="addMarker(39.2329533,-2)">Añade</button></p>
+                <p><button ng-click="mapa.prueba()">Prueba</button></p>
             </div>
             
-                    <div ng-controller="MiAplicacion01Controller" class="row" >
+                    <div  class="row" >
                 <h4 class="center-align"> Listado Open Data</h4>
-                <div class="col s8 offset-s2">
+                <div class="col s8 ">
                     <p>Zona de prueba</p>
                     <pre ng-model="data">
                     {{data}}
@@ -70,6 +74,7 @@
                                 <th>Fecha modificación</th>
                                 <th>Intensidad</th>
                                 <th>URI</th>
+                                <th>{{mapa.nombre}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -81,13 +86,19 @@
                                 <td>{{d['dc:modified'] | date:'dd-MM-yyyy HH:mm:ss'}}</td>
                                 <td>{{d['vlc:intensidad']}}</td>
                                 <td>{{d.uri}}</td>
+                                <td><button ng-click="addMarker(724223.322,4368378.536)">Pruebame a</button></td>
+                                <td><button ng-click="addMarkerb()">Prueba</button></td>
+                                <!--<p><button ng-click="mapa.prueba(0,0)">Prueba SIN</button></p>-->
                                 
+                                <!--<td><button ng-click="mapa.prueba({{d['geo:lat']}},{{d['geo:long']}})">Añade</button> </td>-->                               
                             </tr>
                         </tbody>
                     </table>
                     
                 </div>
             </div>
-   
+            <script>
+       
+            </script>
     </body>
 </html>
