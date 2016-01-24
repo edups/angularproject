@@ -2,7 +2,9 @@ var app = angular.module('AGMap', ['google-maps']);
 //var app = angular.module('AngularGoogleMap', ['uiGmapgoogle-maps']);
 
 app.factory('MarkerCreatorService', function () {
-
+      
+    
+   
     var markerId = 0;
 
     function create(latitude, longitude) {
@@ -135,22 +137,38 @@ app.controller('MapCtrl', ['MarkerCreatorService', '$scope','$http', function (M
         }
         
         //JSON
-//         var url="http://apigobiernoabiertortod.valencia.es/apirtod/rest/datasets/intensidad_trafico.json";
-         var url="http://mapas.valencia.es/lanzadera/opendata/aparcabicis/JSON";
+         var url="http://apigobiernoabiertortod.valencia.es/apirtod/rest/datasets/intensidad_trafico.json";
+//         var url="http://mapas.valencia.es/lanzadera/opendata/aparcabicis/JSON";
 
                             $http.get(url, 'GET', '').then(function(data) {
                                 $scope.data = data.data.resources;
-                            
+                  
                                 
                                 $scope.addMarkerb = function () {
-         var latitude = $scope.data[0]['geo:lat'];
-         var longitude = $scope.data[0]['geo:long'];
+                   for (var i = 0,l = data.data.resources.length; i < l; i++) {
+         var utm = "+proj=utm +zone=30";
+         var latitudesin = $scope.data[i]['geo:lat'];
+         var longitudesin = $scope.data[i]['geo:long'];
+         var datospasados= proj4(utm).inverse([longitudesin,latitudesin]);
+         var latitude = datospasados[1];
+         var longitude = datospasados[0];
+         var intensity =  $scope.data[i]['vlc:intensidad'];
+         if (intensity <= 100){
             MarkerCreatorService.createByCoords(latitude,longitude,function (marker) {
-                marker.options.labelContent = 'Añadido';
+                marker.options.labelContent = 'Fluido';
+                 marker.options.icon='https://maps.google.com/mapfiles/ms/icons/green-dot.png';
                 $scope.map.markers.push(marker);
                 refresh(marker);
             });
-        };
+        } else {
+             MarkerCreatorService.createByCoords(latitude,longitude,function (marker) {
+                marker.options.labelContent = 'Denso';
+                $scope.map.markers.push(marker);
+                refresh(marker);
+            });
+        }//fin else
+    }// fin for
+        };//fin fuction
                             });
         
     }]);

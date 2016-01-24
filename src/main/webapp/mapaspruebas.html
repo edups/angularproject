@@ -5,7 +5,7 @@
         <title>AngularJS / Google Maps </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="materialize/css/materialize.min.css" rel="stylesheet" type="text/css"/>
-        <link href="style.css" rel="stylesheet" type="text/css"/>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <!--<link href="style.css" rel="stylesheet"/>-->
 
         <!-- AngularJS -->
@@ -26,6 +26,7 @@
         <!-- Custom angular module -->
         <script src="js/map.js" type="text/javascript"></script>
         <!--<script src="js/controlervarios.js" type="text/javascript"></script>-->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.12/proj4-src.js" type="text/javascript"></script>
 
     </head>
     <body ng-controller="MapCtrl">
@@ -51,6 +52,10 @@
                     <button ng-click="addAddress()">Buscar</button>    
                 </p>
             </div>
-   
+     <script>
+    var utm = "+proj=utm +zone=30";
+//    var wgs84 = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
+    console.log(proj4(utm).inverse([726431.359299443,4369779.5750595005]));
+  </script>
     </body>
 </html>
