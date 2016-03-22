@@ -20,6 +20,7 @@
         <div class="container">
             <div class="row">
                 <h4 class="center-align"> Listado con Angular</h4>
+                <input type="text" placeholder="Buscar..." ng-model="personaBuscado">
                 <div class="col s8 offset-s2">
                     <table class="striped">
                         <thead>
@@ -31,7 +32,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="b in bean">
+                            <tr ng-repeat="b in bean| filter:personaBuscado">
                                 <td>{{b.id}}</td>
                                 <td>{{b.nombre}}</td>
                                 <td>{{b.apellido1}}</td>
