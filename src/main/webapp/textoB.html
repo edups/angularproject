@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html ng-app="MiAplicacion">
+    <head>
+        <title>Pruebas texto Angular</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="materialize/css/materialize.min.css" rel="stylesheet" type="text/css"/>
+       
+        <script src="js/vendor/angular.min.js" type="text/javascript"></script>
+        <script>
+            var myapp = angular.module('MiAplicacion', []);
+       
+                    myapp.controller('MiAplicacion01Controller', ['$scope', function($scope) {
+    $scope.showContent = function($fileContent){
+        $scope.content = $fileContent;
+         
+      
+        //var txt =JSON.stringify($fileContent);
+       // var txtsin= txt.replace(/^\s+|\s+$/g, '');
+
+        var prueba2 = ($fileContent).split("|");
+        var prueba = JSON.stringify(prueba2);
+        console.log(prueba);
+    };
+
+  /*
+
+    function produceJSON(text) {
+    var arr = [];
+  
+  // we loop from 1 to 1 less than the length because
+  // the first two elements are empty due to the way the split worked
+  for (var i = 0, l = text.length - 1; i < l; i++) {
+    var obj = {};
+    obj[text[i]] = i;
+    arr.push(obj);
+  }
+  return JSON.stringify(arr);
+}
+*/
+                        }]);
+                    
+                    myapp.directive('onReadFile', function ($parse) {
+	return {
+		restrict: 'A',
+		scope: false,
+		link: function(scope, element, attrs) {
+            var fn = $parse(attrs.onReadFile);
+            
+			element.on('change', function(onChangeEvent) {
+				var reader = new FileReader();
+                
+				reader.onload = function(onLoadEvent) {
+					scope.$apply(function() {
+						fn(scope, {$fileContent:onLoadEvent.target.result});
+					});
+				};
+
+				reader.readAsText((onChangeEvent.srcElement || onChangeEvent.target).files[0]);
+			});
+		}
+	};
+});
+        </script> 
+    </head>
+    <body ng-controller="MiAplicacion01Controller">
+                <a href="index.html" class="waves-effect waves-light btn">Home</a>
+        <div class="container">
+            <div class="row">
+                <h4 class="center-align"> Pruebas texto</h4>
+              
+                <div class="col s8 offset-s2">
+
+  <h1>Select text file</h1>
+    <input type="file" on-read-file="showContent($fileContent)" />
+    <div ng-if="content">
+        <h2>File content is:</h2>
+        <pre>{{ content }}</pre>
+    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
