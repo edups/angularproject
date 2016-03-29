@@ -17,27 +17,57 @@
       
         //var txt =JSON.stringify($fileContent);
        // var txtsin= txt.replace(/^\s+|\s+$/g, '');
+       //Separar por salto de línea
+       var saltos = ($fileContent).split('\n');
+       console.log(saltos);
+       console.log("longitud" + saltos.length);
+    
+        function produceJSONete(text) {
+        //Crear arrray paciente por cada salto
+        var arr = [];
+       for (var i = 0, l = saltos.length; i < l; i++) {
+            var paciente = {};    
+            paciente[i] = saltos[i];
+            arr.push(paciente);
+        }
+        return JSON.stringify(arr);
+    }
+    
+    var arrayPaciente = produceJSONete(saltos);
+    console.log("array de pacientes" + arrayPaciente);
+       // var campos =($fileContent).split(/[|\n]+/);
+        //var longitud = 22;
+        //var obj_array= campos.length / longitud;
+        //Partir el contenido en objetos separados
+        //console.log("todo a una" + campos);
+        //console.log("Longitud de archivos " + campos.length);
+        //console.log("Hay un total de " + (obj_array) + " objetos en la array");
+        //var prueba = produceJSON(campos);
+        //console.log("Esto es prueba" + prueba);
 
-        var prueba2 = ($fileContent).split("|");
-        var prueba = JSON.stringify(prueba2);
-        console.log(prueba);
     };
 
-  /*
+  
 
     function produceJSON(text) {
     var arr = [];
   
   // we loop from 1 to 1 less than the length because
   // the first two elements are empty due to the way the split worked
-  for (var i = 0, l = text.length - 1; i < l; i++) {
-    var obj = {};
-    obj[text[i]] = i;
+  for (var i = 0, l = text.length; i < l; i++) {
+
+    //for (var j = 0, max = 2; j < max; j++) {
+     var obj = {};    
+    obj[i] = text[i];
     arr.push(obj);
+  //}
+   
   }
   return JSON.stringify(arr);
 }
-*/
+
+
+
                         }]);
                     
                     myapp.directive('onReadFile', function ($parse) {
