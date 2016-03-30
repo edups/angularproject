@@ -7,18 +7,61 @@
         <link href="materialize/css/materialize.min.css" rel="stylesheet" type="text/css"/>
        
         <script src="js/vendor/angular.min.js" type="text/javascript"></script>
+        <script src="js/vendor/ng-file-upload-shim.js"></script> <!-- for no html5 browsers support -->
+        <script src="js/vendor/ng-file-upload.js"></script>
         <script>
-            var myapp = angular.module('MiAplicacion', []);
+            var myapp = angular.module('MiAplicacion', ['ngFileUpload']);
        
                     myapp.controller('MiAplicacion01Controller', ['$scope', function($scope) {
-    $scope.showContent = function($fileContent){
-        $scope.content = $fileContent;
+    
+     
+    
+    
+    
+    
+    
+        $scope.showContent = function(file){
+        $scope.content = file;
          
+      console.log(file);
       
+     function readMultipleFiles(evt) {
+    //Retrieve all the files from the FileList object
+    var files = evt.target.files; 
+    		
+    if (files) {
+        for (var i=0, f; f=files[i]; i++) {
+	          var r = new FileReader();
+            r.onload = (function(f) {
+                return function(e) {
+                    var contents = e.target.result;
+                    alert( "Got the file.n" 
+                          +"name: " + f.name + "n"
+                          +"type: " + f.type + "n"
+                          +"size: " + f.size + " bytesn"
+                          + "starts with: " + contents.substr(1, contents.indexOf("n"))
+                    ); 
+                };
+            })(f);
+
+            r.readAsText(f);
+        }   
+    } else {
+	      alert("Failed to load files"); 
+    }
+     }
+     
+     
+      
+      
+      
+      
+      
+     
         //var txt =JSON.stringify($fileContent);
        // var txtsin= txt.replace(/^\s+|\s+$/g, '');
        //Separar por salto de línea
-       var saltos = ($fileContent).split('\n');
+       var saltos = (file).split('\n');
        console.log(saltos);
        console.log("longitud" + saltos.length);
     
@@ -69,28 +112,7 @@
 
 
                         }]);
-                    
-                    myapp.directive('onReadFile', function ($parse) {
-	return {
-		restrict: 'A',
-                scope: false,
-		link: function(scope, element, attrs) {
-            var fn = $parse(attrs.onReadFile);
-            
-			element.on('change', function(onChangeEvent) {
-				var reader = new FileReader();
-                
-				reader.onload = function(onLoadEvent) {
-					scope.$apply(function() {
-						fn(scope, {$fileContent:onLoadEvent.target.result});
-					});
-				};
 
-				reader.readAsText((onChangeEvent.srcElement || onChangeEvent.target).files[0]);
-			});
-		}
-	};
-});
         </script> 
     </head>
     <body ng-controller="MiAplicacion01Controller">
@@ -102,12 +124,13 @@
                 <div class="col s8 offset-s2">
 
   <h1>Select text file</h1>
-    <input type="file" on-read-file="showContent($fileContent)" />
-    <div ng-if="content">
+     <button ngf-select="showContent($file)" multiple 
+            accept="txt/*">Select Files</button>
+  <div ngf-src="file" > </div>
+ <div ng-if="content">
         <h2>File content is:</h2>
         <pre>{{ content }}</pre>
     </div>
-
 
                 </div>
             </div>
